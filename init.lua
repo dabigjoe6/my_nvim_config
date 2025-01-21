@@ -303,6 +303,26 @@ require('lazy').setup({
     end,
   },
 
+  { 'wakatime/vim-wakatime', lazy = false },
+  {
+    'frankroeder/parrot.nvim',
+    dependencies = { 'ibhagwan/fzf-lua', 'nvim-lua/plenary.nvim' },
+    opts = {},
+    config = function()
+      require('parrot').setup {
+        -- Providers must be explicitly added to make them available.
+        providers = {
+          pplx = {
+            api_key = os.getenv 'PERPLEXITY_API_KEY',
+          },
+          -- provide an empty list to make provider available (no API key required)
+          openai = {},
+          github = {},
+        },
+      }
+    end,
+  },
+
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
